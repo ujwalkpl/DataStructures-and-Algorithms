@@ -7,7 +7,7 @@ struct node{
 };
 
   typedef struct node NODE;
-  NODE *start=NULL,*currptr,*newnode,*prevptr,*nextptr;
+  NODE *last=NULL,*currptr,*newnode,*prevptr,*nextptr;
   int i;
   NODE *getnode(int value){
 
@@ -28,24 +28,25 @@ struct node{
       printf("Enter the element to insert\n");
       scanf("%d",&value);
       newnode=getnode(value);
-      if(start==NULL){
-        start=newnode;
+      if(last==NULL){
+        last=newnode;
         newnode->link = NULL;
       }
       else{
-        newnode->link=start;
-        start=newnode;
+        newnode->link=last;
+        last=newnode;
       }
     }
+
   void delete_beg(){
-      if(start==NULL){
+      if(last==NULL){
         printf("List Empty,No elements to delete");
         return;
       }
       else{
 
-        currptr=start;
-        start=start->link;
+        currptr=last->link;
+        last->link=last->link->link;
               printf("element deleted is %d",currptr->data);
         free(currptr);
       }
@@ -55,16 +56,15 @@ struct node{
       printf("Enter the value to be inserted");
       scanf("%d",&value);
       newnode=getnode(value);
-      if(start==NULL){
-        start=newnode;
-        newnode->link=NULL;
+      if(last==NULL){
+        last=newnode;
+        newnode->link=last;
       }
       else{
-        currptr=start;
-        while(currptr->link!=NULL)
-        currptr=currptr->link;
-        currptr->link=newnode;
-        newnode->link=NULL;
+        newnode->link=last->link;
+        last->link=newnode;
+        last=last->link;
+
       }
     }
 
@@ -76,7 +76,7 @@ struct node{
       newnode=getnode(value);
       printf("Enter the position");
       scanf("%d",&pos);
-      currptr=start;
+      currptr=last;
       while(currptr!=NULL){
         count++;
         currptr=currptr->link;
@@ -85,7 +85,7 @@ struct node{
         insert_beg();
       }
       else if(pos>1 && pos<=count){
-        currptr=start;
+        currptr=last;
       for(i=1;i<pos-1;i++)  {
         currptr=currptr->link;
       }

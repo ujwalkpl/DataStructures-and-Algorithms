@@ -3,7 +3,8 @@
 
 struct node{
   int data;
-  struct node *link;
+  struct node *forw;
+  struct node *back;
 };
 
   typedef struct node NODE;
@@ -16,7 +17,8 @@ struct node{
       printf("Memory not available\n");
     }
     else{
-      newnode->link=NULL;
+      newnode->forw=NULL;
+      newnode->back=NULL;
       newnode->data=value;
       return newnode;
     }
@@ -30,11 +32,15 @@ struct node{
       newnode=getnode(value);
       if(start==NULL){
         start=newnode;
-        newnode->link = NULL;
+        newnode->forw = NULL;
+        newnode->back=NULL;
       }
       else{
-        newnode->link=start;
+        newnode->forw=start;
+  newnode->back=NULL;
+  start->back=newnode;
         start=newnode;
+
       }
     }
   void delete_beg(){
@@ -45,7 +51,9 @@ struct node{
       else{
 
         currptr=start;
-        start=start->link;
+        start=start->forw;
+        start->back=NULL;
+
               printf("element deleted is %d",currptr->data);
         free(currptr);
       }
@@ -57,14 +65,16 @@ struct node{
       newnode=getnode(value);
       if(start==NULL){
         start=newnode;
-        newnode->link=NULL;
+        newnode->forw=NULL;
+        newnode->back=NULL;
       }
       else{
         currptr=start;
-        while(currptr->link!=NULL)
-        currptr=currptr->link;
-        currptr->link=newnode;
-        newnode->link=NULL;
+        while(currptr->forw!=NULL)
+        currptr=currptr->forw;
+        currptr->forw=newnode;
+        newnode->forw=NULL;
+        newnode->back=currptr;
       }
     }
 
@@ -79,7 +89,7 @@ struct node{
       currptr=start;
       while(currptr!=NULL){
         count++;
-        currptr=currptr->link;
+        currptr=currptr->forw;
         }
       if(pos==1){
         insert_beg();
@@ -87,10 +97,13 @@ struct node{
       else if(pos>1 && pos<=count){
         currptr=start;
       for(i=1;i<pos-1;i++)  {
-        currptr=currptr->link;
+        currptr=currptr->forw;
       }
-      newnode->link=currptr->link;
-      currptr->link=newnode;
+      newnode->forw=currptr->forw;
+      currptr->forw->back=newnode;
+
+      currptr->forw=newnode;
+      newnode->back=currptr;
 
       }
       else{
@@ -103,12 +116,12 @@ struct node{
       }
       else{
         currptr=start;
-        while(currptr->link->link!=NULL){
-          currptr=currptr->link;
+        while(currptr->forw->forw!=NULL){
+          currptr=currptr->forw;
 
         }
-        nextptr=currptr->link;
-        currptr->link=NULL;
+        nextptr=currptr->forw;
+        currptr->forw=NULL;
         printf("element deleted is %d",nextptr->data);
         free(nextptr);
 
@@ -126,7 +139,7 @@ struct node{
         currptr=start;
         while (currptr!=NULL) {
           count++;
-          currptr=currptr->link;
+          currptr=currptr->forw;
         }
         if(pos==1){
           delete_beg();
@@ -134,10 +147,11 @@ struct node{
         }else if(pos>1 && pos<=count){
           currptr=start;
           for(i=1;i<pos-1;i++){
-            currptr=currptr->link;
+            currptr=currptr->forw;
           }
-          nextptr=currptr->link;
-          currptr->link=currptr->link->link;
+          nextptr=currptr->forw;
+          currptr->forw=currptr->forw->forw;
+          currptr->forw->back=currptr;
           printf("the deleted element is %d",nextptr->data);
         }else{
           printf("position out of bound");
@@ -149,14 +163,24 @@ struct node{
       currptr=start;
       while (currptr!=NULL) {
         printf("%d",currptr->data);
-        currptr=currptr->link;
+        currptr=currptr->forw;
+      }
+    }
+    void display_reverse(){
+      currptr=start;
+      while(currptr->forw!=NULL){
+        currptr=currptr->forw;
+      }
+      while(currptr!=NULL){
+        printf("%d",currptr->data);
+        currptr=currptr->back;
       }
     }
 
 
 void main() {
   int choice,i;
-  printf("1.Insert Beginning\n2.Insert End\n3.Insert position\n4.Delete Beginning\n5.Delete Ending\n6.Delete position\n7.display\n");
+  printf("1.Insert Beginning\n2.Insert End\n3.Insert position\n4.Delete Beginning\n5.Delete Ending\n6.Delete position\n7.display\n8.display reverse\n");
   do {
       printf("Enter the choice\n");
       scanf("%d",&choice);
@@ -182,11 +206,14 @@ void main() {
       case 7:
         display();
         break;
+      case 8:
+        display_reverse();
+        break;
 
 
     }
     fflush(stdin);
-  } while(choice!=8);
+  } while(choice!=9);
 
 
 }
