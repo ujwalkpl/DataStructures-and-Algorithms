@@ -98,11 +98,11 @@ struct node{
       }
     }
     void delete_end(){
-      if(start==NULL){
+      if(last==NULL){
         printf("list empty,no elements to delete");
       }
       else{
-        currptr=start;
+        currptr=last;
         while(currptr->link->link!=NULL){
           currptr=currptr->link;
 
