@@ -37,22 +37,10 @@ struct node{
         start=newnode;
       }
     }
-  void delete_beg(){
-      if(start==NULL){
-        printf("List Empty,No elements to delete");
-        return;
-      }
-      else{
-
-        currptr=start;
-        start=start->link;
-              printf("element deleted is %d",currptr->data);
-        free(currptr);
-      }
-    }
+  
     void insert_end(){
       int value;
-      printf("Enter the value to be inserted");
+      printf("Enter the value to be inserted\n");
       scanf("%d",&value);
       newnode=getnode(value);
       if(start==NULL){
@@ -71,10 +59,10 @@ struct node{
     void insert_pos(){
       int value,count=0,pos;
 
-      printf("Enter the value to be inserted");
+      printf("Enter the value to be inserted\n");
       scanf("%d",&value);
       newnode=getnode(value);
-      printf("Enter the position");
+      printf("Enter the position\n");
       scanf("%d",&pos);
       currptr=start;
       while(currptr!=NULL){
