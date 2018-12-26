@@ -3,21 +3,24 @@
 struct node{
   int data;
   struct node *link;
+
 };
 typedef struct node NODE;
+
 NODE *start,*newnode,*currptr;
 
 NODE *getnode(int value){
+
   newnode=(NODE *)malloc(sizeof(NODE));
   if(newnode==NULL){
     printf("Memory not available");
-  }else{
+
+  }
+  else{
     newnode->data=value;
     newnode->link=NULL;
   }
 }
-
-
 
 void insert_end(){
   int value;
@@ -26,7 +29,6 @@ void insert_end(){
   newnode=getnode(value);
   if(start==NULL){
     start=newnode;
-    newnode->link=NULL;
   }
   else{
     currptr=start;
@@ -34,23 +36,32 @@ void insert_end(){
       currptr=currptr->link;
     }
     currptr->link=newnode;
-     newnode->link=NULL;
   }
 }
 
 
-void delete_beg(){
+void delete_end(){
   if(start==NULL){
-    printf("Queue Underflow,no elements to delete\n");
+    printf("list empty,no elements to \n");
+  }
+  else if(start->link==NULL){
+    free(start->link);
+    start=NULL;
+  }else{
+    currptr=start;
+    while(currptr->link->link!=NULL){
+      currptr=currptr->link;
+
+    }
+    free(currptr->link);
+    currptr->link=NULL;
+
 
   }
-  else{
-    currptr=start;
-    start=start->link;
-    free(currptr);
-  }
 }
-void Display(){
+
+
+void display(){
   if(start==NULL){
     printf("Queue empty,no elements to display");
   }
@@ -61,27 +72,26 @@ void Display(){
   }
   printf("\n");
 }
+
 void main(){
   int choice;
-    printf("Queue Operations\n1.Insert\n2.Delete\n3.Display\n4.Exit\n");
-do {
-  printf("Enter the choice\n");
-  scanf("%d",&choice);
-
-  switch (choice) {
-    case 1:
-      insert_end();
-      break;
-    case 2:
-      delete_beg();
-      break;
-    case 3:
-      Display();
-      break;
-    case 4:
-      exit(0);
-      break;
-
-  }
-} while(choice!=4);
+  printf("stack operations\n1.push\n2.pop\n3.display\n4.Exit\n");
+  do {
+    printf("Enter the choice\n");
+    scanf("%d",&choice);
+    switch (choice) {
+      case 1:
+        insert_end();
+        break;
+      case 2:
+        delete_end();
+        break;
+      case 3:
+        display();
+        break;
+      case 4:
+        exit(0);
+        break;
+    }
+  } while(choice!=4);
 }

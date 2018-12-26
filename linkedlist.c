@@ -22,7 +22,7 @@ struct node{
     }
     }
 
-    void insert_beg(){
+  void insert_beg(){
       int value;
 
       printf("Enter the element to insert\n");
@@ -101,7 +101,10 @@ struct node{
       if(start==NULL){
         printf("list empty,no elements to delete");
       }
-      else{
+      else if(start->link==NULL){
+        free(start->link);
+        start->link=NULL;
+      }else{
         currptr=start;
         while(currptr->link->link!=NULL){
           currptr=currptr->link;

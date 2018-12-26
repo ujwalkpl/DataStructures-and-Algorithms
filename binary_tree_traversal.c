@@ -1,27 +1,27 @@
 #include<stdio.h>
 #include<stdlib.h>
+
 struct node{
   int data;
   struct node *rightchild;
   struct node *leftchild;
 
 };
+
 typedef struct node NODE;
+
 NODE *root,*newnode;
+
 int value;
 
 NODE *getnode(int value){
-
-
     newnode=(NODE *)malloc(sizeof(NODE));
     newnode->data=value;
     newnode->leftchild=NULL;
     newnode->rightchild=NULL;
     return newnode;
-
-
-
 }
+
 NODE *createnode(NODE *root,int value){
   char ch;
   if(root==NULL){
@@ -32,20 +32,21 @@ NODE *createnode(NODE *root,int value){
   scanf(" %c",&ch);
   if(ch=='l'){
     root->leftchild=createnode(root->leftchild,value);
-
-  }
-  else if(ch=='r'){
+  }else if(ch=='r'){
     root->rightchild=createnode(root->rightchild,value);
   }
   return root;
 }
+
 void preorder(NODE *root){
+
   while(root!=NULL){
     printf("%d ",root->data);
     preorder(root->leftchild);
     preorder(root->rightchild);
   }
 }
+
 void postorder(NODE *root){
   while(root!=NULL){
     postorder(root->leftchild);
@@ -53,6 +54,7 @@ void postorder(NODE *root){
     printf("%d ",root->data);
   }
 }
+
 void inorder(NODE *root){
   while(root!=NULL){
     postorder(root->leftchild);
@@ -61,7 +63,6 @@ void inorder(NODE *root){
 
   }
 }
-
 
 void main(){
   int choice,value;
@@ -72,19 +73,19 @@ void main(){
     scanf("%d",&choice);
     switch (choice) {
       case 1:
-        printf("Enter the element to be inserted\n");
-        scanf("%d",&value);
-        root=createnode(root,value);
-        break;
+         printf("Enter the element to be inserted\n");
+         scanf("%d",&value);
+         root=createnode(root,value);
+         break;
       case 2:
-          preorder(root);
-          break;
+        preorder(root);
+        break;
       case 3:
-          postorder(root);
-          break;
-        case 4:
-          inorder(root);
-          break;
+        postorder(root);
+        break;
+      case 4:
+        inorder(root);
+        break;
 
     }
     fflush(stdin);
