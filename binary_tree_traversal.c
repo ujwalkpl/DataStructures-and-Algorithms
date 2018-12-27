@@ -28,12 +28,19 @@ NODE *createnode(NODE *root,int value){
     return getnode(value);
   }
   printf("The current root node is %d\n",root->data);
-  printf("Enter 'l'to go left or 'r' to go right");
+
+  printf("Enter 'l'to go left or 'r' to go right or 'n' to display the number of children");
   scanf(" %c",&ch);
   if(ch=='l'){
     root->leftchild=createnode(root->leftchild,value);
   }else if(ch=='r'){
     root->rightchild=createnode(root->rightchild,value);
+  }else if(ch=='n'){
+  if(root->leftchild!=NULL && root->rightchild!=NULL)
+  printf("Number of children is 2\n");
+  else if(root->leftchild!=NULL || root->rightchild!=NULL)
+   printf("Number of children is 1\n");
+   else printf("Number of children is 0\n");
   }
   return root;
 }
@@ -68,7 +75,7 @@ void main(){
   int choice,value;
 
   do {
-    printf("1.Insert\n2.preOrder\n3.postOrder\n4.inOrder\n");
+    printf("1.Insert\n2.preOrder\n3.postOrder\n4.inOrder\n5.number of children");
     printf("Enter choice\n");
     scanf("%d",&choice);
     switch (choice) {
@@ -86,6 +93,7 @@ void main(){
       case 4:
         inorder(root);
         break;
+      case 
 
     }
     fflush(stdin);

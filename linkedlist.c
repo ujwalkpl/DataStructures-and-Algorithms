@@ -151,15 +151,25 @@ struct node{
     void display(){
       currptr=start;
       while (currptr!=NULL) {
-        printf("%d",currptr->data);
+        printf("%d ",currptr->data);
         currptr=currptr->link;
       }
+      printf("\n");
     }
 
+   void number_of_nodes(){
+     currptr=start;
+     int count=0;
+     while(currptr!=NULL){
+       currptr=currptr->link;
+       count++;
+     }
+     printf("%d\n",count);
+   }
 
 void main() {
   int choice,i;
-  printf("1.Insert Beginning\n2.Insert End\n3.Insert position\n4.Delete Beginning\n5.Delete Ending\n6.Delete position\n7.display\n");
+  printf("1.Insert Beginning\n2.Insert End\n3.Insert position\n4.Delete Beginning\n5.Delete Ending\n6.Delete position\n7.display\n8.number of nodes");
   do {
       printf("Enter the choice\n");
       scanf("%d",&choice);
@@ -185,11 +195,13 @@ void main() {
       case 7:
         display();
         break;
-
+      case 8:
+        number_of_nodes();
+        break;
 
     }
     fflush(stdin);
-  } while(choice!=8);
+  } while(choice!=9);
 
 
 }
