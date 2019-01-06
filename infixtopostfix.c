@@ -103,46 +103,4 @@ void main(){
   postfix[j]='\0';
   printf("The postfix expression is ");
   puts(postfix);
-  evaluation(postfix);
-}
-
-void evaluation(char a[]){
-   i=0;
-  top=-1;
-  float stack1[SIZE];
-  char postfix1[SIZE];
-
-  float op1,op2,item;
-//  printf("Enter the postfix expression\n");
-//  gets(postfix);
-  while(postfix1[i]!='\0'){
-    item=(float)(postfix1[i]-'0');
-    if(isdigit(postfix1[i])){
-      push(item);
-    }
-    else{
-      op2=pop();
-      op1=pop();
-      switch (postfix1[i]) {
-        case '+':
-        push(op1+op2);
-
-        break;
-        case '-':
-        push(op1-op2);
-        break;
-        case '*':
-        push(op1*op2);
-        break;
-        case '/':
-        push(op1/op2);
-        break;
-        case '^':
-        push(pow(op1,op2));
-        break;
-      }
-    }
-    i++;
-  }
-  printf("%f",stack1[top]);
 }
