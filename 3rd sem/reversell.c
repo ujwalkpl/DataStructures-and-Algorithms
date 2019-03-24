@@ -37,7 +37,7 @@ struct node{
         start=newnode;
       }
     }
-  
+
     void insert_end(){
       int value;
       printf("Enter the value to be inserted\n");
@@ -93,19 +93,29 @@ struct node{
       }
     }
 
+    //  void reverse(){
+    //     currptr = start;
+    //     prevptr = NULL;
+    //   nextptr = NULL;
+    //
+    // while (currptr != NULL) {
+    //         nextptr= currptr->link;
+    //         currptr->link = prevptr;
+    //         prevptr = currptr;
+    //         currptr = nextptr;
+    //     }
+    //     start = prevptr;
+    //
+    // }
+
+
     void reverse(){
-        currptr = start;
-        prevptr = NULL;
-      nextptr = NULL;
-
-    while (currptr != NULL) {
-            nextptr= currptr->link;
-            currptr->link = prevptr;
-            prevptr = currptr;
-            currptr = nextptr;
-        }
-        start = prevptr;
-
+      currptr=start;
+      while(currptr->link->link!=NULL){
+        currptr=currptr->link;
+      }
+      nextptr=currptr->link;
+      nextptr=
     }
     void main(){
       int choice;

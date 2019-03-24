@@ -10,15 +10,17 @@ struct node{
 
 typedef struct node NODE;
 
-NODE *root,*newnode;
+NODE *root=NULL,*newnode;
 
 int value;
 
 NODE *getnode(int value){
     newnode=(NODE *)malloc(sizeof(NODE));
+
     newnode->data=value;
     newnode->leftchild=NULL;
     newnode->rightchild=NULL;
+
     return newnode;
 }
 
@@ -29,7 +31,7 @@ NODE *createnode(NODE *root,int value){
   }
   printf("The current root node is %d\n",root->data);
 
-  printf("Enter 'l'to go left or 'r' to go right or 'n' to display the number of children");
+  printf("Enter 'l'to go left or 'r' to go right or 'n' to display the number of children\n");
   scanf(" %c",&ch);
   if(ch=='l'){
     root->leftchild=createnode(root->leftchild,value);
@@ -43,11 +45,12 @@ NODE *createnode(NODE *root,int value){
    else printf("Number of children is 0\n");
   }
   return root;
+
 }
 
 void preorder(NODE *root){
 
-  while(root!=NULL){
+  if(root!=NULL){
     printf("%d ",root->data);
     preorder(root->leftchild);
     preorder(root->rightchild);
@@ -55,7 +58,7 @@ void preorder(NODE *root){
 }
 
 void postorder(NODE *root){
-  while(root!=NULL){
+  if(root!=NULL){
     postorder(root->leftchild);
     postorder(root->rightchild);
     printf("%d ",root->data);
@@ -63,7 +66,7 @@ void postorder(NODE *root){
 }
 
 void inorder(NODE *root){
-  while(root!=NULL){
+  if(root!=NULL){
     postorder(root->leftchild);
       printf("%d ",root->data);
     postorder(root->rightchild);
@@ -73,9 +76,9 @@ void inorder(NODE *root){
 
 void main(){
   int choice,value;
-
+  printf("1.Insert\n2.preOrder\n3.postOrder\n4.inOrder\n5.number of children\n");
   do {
-    printf("1.Insert\n2.preOrder\n3.postOrder\n4.inOrder\n5.number of children");
+
     printf("Enter choice\n");
     scanf("%d",&choice);
     switch (choice) {
@@ -93,7 +96,7 @@ void main(){
       case 4:
         inorder(root);
         break;
-      case
+
 
     }
     fflush(stdin);

@@ -8,7 +8,7 @@ struct node{
 };
 
   typedef struct node NODE;
-  NODE *start=NULL,*currptr,*newnode,*prevptr,*nextptr;
+  NODE *start=NULL,*currptr,*newnode,*prevptr,*nextptr,*lastptr,*firstptr;
   int i;
   NODE *getnode(int value){
 
@@ -176,6 +176,23 @@ struct node{
         currptr=currptr->back;
       }
     }
+    void palindrome(){
+      int flag=0;
+      firstptr=start;
+      lastptr=start;
+      while(lastptr->forw!=NULL)
+        lastptr=lastptr->forw;
+      while(firstptr!=lastptr){
+        if(firstptr->data!=lastptr->data)
+          flag=1;
+        firstptr=firstptr->forw;
+        lastptr=lastptr->back;
+      }
+      if(flag==1)
+        printf("Not a palindrome");
+      else
+        printf("palindrome");
+    }
 
 
 void main() {
@@ -207,7 +224,7 @@ void main() {
         display();
         break;
       case 8:
-        display_reverse();
+        palindrome();
         break;
 
 

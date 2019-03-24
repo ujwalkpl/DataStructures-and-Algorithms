@@ -30,30 +30,35 @@ struct node{
       newnode=getnode(value);
       if(last==NULL){
         last=newnode;
-        newnode->link = NULL;
+        newnode->link = last;
       }
       else{
-        newnode->link=last;
-        last=newnode;
+        newnode->link=last->link;
+        last->link=newnode;
       }
     }
 
   void delete_beg(){
       if(last==NULL){
-        printf("List Empty,No elements to delete");
+        printf("List Empty,No elements to delete\n");
         return;
       }
+      else if(last->link==last){
+        printf("element deleted is %d\n",last->data);
+        free(last);
+        last=NULL;
+      }
       else{
-
         currptr=last->link;
         last->link=last->link->link;
-              printf("element deleted is %d",currptr->data);
+        printf("element deleted is %d\n",currptr->data);
         free(currptr);
       }
     }
+
     void insert_end(){
       int value;
-      printf("Enter the value to be inserted");
+      printf("Enter the value to be inserted\n");
       scanf("%d",&value);
       newnode=getnode(value);
       if(last==NULL){
@@ -71,20 +76,22 @@ struct node{
     void insert_pos(){
       int value,count=0,pos;
 
-      printf("Enter the value to be inserted");
-      scanf("%d",&value);
-      newnode=getnode(value);
+
       printf("Enter the position");
       scanf("%d",&pos);
-      currptr=last;
-      while(currptr!=NULL){
+      currptr=last->link;
+      while(currptr!=last){
         count++;
         currptr=currptr->link;
         }
+        count++;
       if(pos==1){
         insert_beg();
       }
       else if(pos>1 && pos<=count){
+        printf("Enter the value to be inserted");
+        scanf("%d",&value);
+        newnode=getnode(value);
         currptr=last;
       for(i=1;i<pos-1;i++)  {
         currptr=currptr->link;
@@ -93,22 +100,30 @@ struct node{
       currptr->link=newnode;
 
       }
-      else{
+      else if(pos==count+1)
+        insert_end();
+      else
         printf("position out of range");
       }
-    }
     void delete_end(){
       if(last==NULL){
         printf("list empty,no elements to delete");
       }
+      else if(last->link==last){
+        printf("element deleted is %d\n",last->data);
+        free(last);
+        last=NULL;
+      }
       else{
         currptr=last;
-        while(currptr->link->link!=NULL){
+        while(currptr->link!=last){
           currptr=currptr->link;
 
         }
+
         nextptr=currptr->link;
-        currptr->link=NULL;
+        currptr->link=currptr->link->link;
+        last=currptr;
         printf("element deleted is %d",nextptr->data);
         free(nextptr);
 
@@ -117,14 +132,14 @@ struct node{
 
     void delete_pos(){
       int pos,count=0;
-      if(start==NULL){
+      if(last==NULL){
         printf("list empty,no elements to delete");
       }
       else{
         printf("Enter the position");
         scanf("%d",&pos);
-        currptr=start;
-        while (currptr!=NULL) {
+        currptr=last->link;
+        while (currptr!=last) {
           count++;
           currptr=currptr->link;
         }
@@ -132,7 +147,7 @@ struct node{
           delete_beg();
           return;
         }else if(pos>1 && pos<=count){
-          currptr=start;
+          currptr=last;
           for(i=1;i<pos-1;i++){
             currptr=currptr->link;
           }
@@ -146,11 +161,12 @@ struct node{
       }
     }
     void display(){
-      currptr=start;
-      while (currptr!=NULL) {
-        printf("%d",currptr->data);
+      currptr=last->link;
+      while (currptr!=last) {
+        printf("%d ",currptr->data);
         currptr=currptr->link;
       }
+      printf("%d\n",currptr->data);
     }
 
 

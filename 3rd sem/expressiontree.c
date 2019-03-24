@@ -3,7 +3,17 @@
 #include<ctype.h>
 #include<math.h>
 
-#define SIZE 20
+#define SIZE 10
+
+
+
+
+
+
+
+
+
+
 struct node{
   char data;
   struct node *leftchild;
@@ -58,11 +68,11 @@ NODE *getnode(char item){
   }
 }
 
-void createnode(char *postfix){
+NODE *createnode(char *postfix){
   int i;
   for(i=0; postfix[i] != '\0';i++){
     if(isoperator(postfix[i])){
-      
+
       root=getnode(postfix[i]);
       root->rightchild=pop();
 
@@ -78,7 +88,7 @@ void createnode(char *postfix){
         push(root);
       }
     }
-    tree=pop();
+    return(pop());
   }
 
 int evaluate(NODE *root){
@@ -108,7 +118,7 @@ int evaluate(NODE *root){
 void main(){
     printf("Enter the postfix expression");
     scanf("%s",postfix);
-    createnode(postfix);
+    tree=createnode(postfix);
 
     printf("\n");
     printf("The evaluation of the expression is %d",evaluate(tree));

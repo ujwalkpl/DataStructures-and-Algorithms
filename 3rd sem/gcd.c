@@ -16,15 +16,15 @@ void main(){
   scanf("%d",&num2);
 
   if(num1==0){
-    printf("gcd of %d and %d is %d",num1,num2,num2);
+    printf("1gcd of %d and %d is %d",num1,num2,num2);
     }
     else if(num2==0){
-      printf("gcd of %d and %d is %d",num1,num2,num1);
+      printf("2gcd of %d and %d is %d",num1,num2,num1);
     }
     else if(num1==0&&num2==0){
-      printf("gcd is not defined");
+      printf("3gcd is not defined");
     }else{
       value=gcd(num1,num2);
-      printf("gcd of %d and %d is %d",num1,num2,value);
+      printf("4gcd of %d and %d is %d",num1,num2,value);
     }
 }

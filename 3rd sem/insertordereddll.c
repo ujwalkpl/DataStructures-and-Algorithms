@@ -45,6 +45,9 @@ NODE *getnode(int value){
       newnode->forw=currptr->forw;
       currptr->forw=newnode;
       newnode->back=currptr;
+      if(newnode->forw!=NULL)
+        newnode->forw->back=newnode;
+
     }
   }
   void Insert(){

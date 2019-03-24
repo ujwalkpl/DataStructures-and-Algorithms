@@ -4,6 +4,7 @@ int rear=-1,front=-1,count=0;
 int queue[SIZE];
 void insert(){
   int item;
+
   printf("Enter the element to insert");
   scanf("%d",&item);
   if(rear==-1){
