@@ -6,13 +6,13 @@
 int num,count;
 int adj[MAX][MAX];
 int visited[MAX],que[MAX];
-int front=-1,rear=0;
+int front=-1,rear=-1;
 void insertq(int element){
     if(front==-1)
         front=0;
     rear=rear+1;
     que[rear]=element;
-   // printf("   %d inserted    ",element);
+  //  printf("   %d inserted    ",element);
 
 }
 
@@ -25,7 +25,7 @@ int deleteq(){
 	}
     delete_item = que[front];
 	front = front+1;
-  //  printf("    %d deleted    ",delete_item);
+    //printf("    %d deleted    ",delete_item);
 	return delete_item;
 
 
