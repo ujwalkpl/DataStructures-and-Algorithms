@@ -41,9 +41,9 @@ void dijstras(int cost[MAX][MAX],int s,int n){
 
     for(i=0;i<n;i++){
       if(i!=s){
-      printf(" distance is %d ",distance[i]);
+      printf(" \nShortese distance from %d to %d is %d ",s,i,distance[i]);
        j=i;
-       printf("%d",i);
+       printf(" The path taken is %d",i);
       do{
         j=pred[j]; 
         
@@ -64,16 +64,42 @@ void main(){
   printf("Enter the number of nodes\n");
 
   scanf("%d",&n);
-  printf("Enter the cost matrix\n");
-  for(i=0;i<n;i++){
-    for(j=0;j<n;j++){
+  // printf("Enter the cost matrix\n");
+  // for(i=0;i<n;i++){
+  //   for(j=0;j<n;j++){
 
     
-    scanf("%d",&cost[i][j]);
-    if(cost[i][j]==0)
-      cost[i][j]=MAX;
+  //   scanf("%d",&cost[i][j]);
+
+    int maxedge;
+    int source,destination;
+
+maxedge=n*(n-1);
+for(i=0;i<maxedge;i++){
+    printf("Enter edge number-%d    ",i+1);
+    scanf("%d %d",&source,&destination);
+    if(source==-1||destination==-1){
+      break;
+
     }
+    else{
+
+    printf("Enter weight ");
+    scanf("%d",&cost[source][destination]);
+    cost[destination][source]=cost[source][destination];
+   
     }
+}
+for(i=0;i<n;i++){
+for(j=0;j<n;j++){
+  if(cost[i][j]==0)
+  cost[i][j]=MAX;
+
+}
+
+}
+
+
  
     printf("Enter the source vertex");
     scanf("%d",&s);
